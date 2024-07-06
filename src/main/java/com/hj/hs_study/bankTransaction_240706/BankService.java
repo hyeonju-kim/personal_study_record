@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BankService {
+    private final BankRepository bankRepository;
 
     // 1. 전체 입출금액의 total
     public long getDepositTotal() throws IOException {
@@ -36,6 +37,16 @@ public class BankService {
             }
         });
         return transactions;
+    }
+
+    // 3. localhost:8081에서 10분마다 전송되는 [전체 입출금액의 total]를 H2 DB에 저장
+    public void saveDepositTotalUpload(BankTransactionDto bankTransactionDto) {
+        bankRepository.save(bankTransactionDto);
+    }
+
+    // 4. localhost:8081에서 10분마다 전송되는 [useCode 정렬된 리스트]를 H2 DB에 저장
+    public void saveSortedListUpload(BankTransactionDto bankTransactionDto) {
+        bankRepository.save(bankTransactionDto);
     }
 
 }

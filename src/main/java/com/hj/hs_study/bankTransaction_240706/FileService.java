@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.List;
 import java.text.SimpleDateFormat;
 
+/**
+ * 로컬 경로에 있는 history.csv 파일을 List<BankTransaction>로 만들어서 반환
+ */
 @Service
 @RequiredArgsConstructor
 public class FileService {

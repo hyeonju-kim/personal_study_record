@@ -1,5 +1,6 @@
 package com.hj.hs_study.bankTransaction_240706;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,13 +10,22 @@ import java.util.Date;
 @Data
 @Service
 @RequiredArgsConstructor
+@Entity
 public class BankTransaction {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     //LocalDate date;
     private Date date;
     private long deposit; //입출금액
     private String description; // 사용내역
     private String useCode; // 사용구분코드
+
+    @ManyToOne
+    @JoinColumn(name = "bank_transaction_dto_id")
+    private BankTransactionDto bankTransactionDto;
+
+
     //@Getter
    // private static List<BankTransaction> transactions = new ArrayList<>();
     /*
